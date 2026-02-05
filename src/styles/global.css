@@ -44,6 +44,9 @@ body {
 .none {
   display: none;
 }
+.orange {
+  color: var(--orange);
+}
 .container {
   max-width: 1080px;
   width: 90%;
