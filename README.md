@@ -1,4 +1,4 @@
-# ¡Hola 👨🏽‍💻! Soy Jose / joseprogramando
+# ¡Hola 👨🏽‍💻! Soy Jose / joseeverm
 
 Bienvenido a mi perfil de GitHub. Soy un desarrollador **junior** apasionado por la tecnología, enfocado en **frontend** y actualmente expandiendo mis habilidades hacia el **backend** para convertirme en **desarrollador Fullstack**.
 
