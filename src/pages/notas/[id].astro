@@ -1,0 +1,54 @@
+---
+import "@/styles/markdown.css";
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const notas = await getCollection(
+    "notas",
+    ({ data }) => !data.draft || import.meta.env.DEV
+  );
+  return notas.map((nota) => ({
+    params: { id: nota.id },
+    props: { nota },
+  }));
+}
+const { nota } = Astro.props;
+const { Content } = await render(nota);
+const fecha = nota.data.date.toISOString().split("T")[0];
+---
+
+<Layout nav={true}>
+  <section class="nota">
+    <header class="nota__header">
+      <h1>{nota.data.title}</h1>
+      <p class="nota__date">[{fecha}]</p>
+    </header>
+    <div class="markdown-body">
+      <Content />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .nota {
+    margin: auto;
+    padding-top: 2rem;
+    width: 90%;
+    max-width: 720px;
+  }
+  .nota__header {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .nota__header h1 {
+    text-align: left;
+    margin: 0;
+  }
+  .nota__date {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--text-grey-dark);
+  }
+</style>

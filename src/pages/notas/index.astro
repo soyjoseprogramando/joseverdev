@@ -1,0 +1,67 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const notas = (
+  await getCollection("notas", ({ data }) => !data.draft || import.meta.env.DEV)
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const formatDate = (date: Date) => date.toISOString().split("T")[0];
+---
+
+<Layout>
+  <div class="container">
+    <section class="notas">
+      <h1>josepro@dev:~/notas</h1>
+      <p class="notas__intro">
+        Escritos personales: reflexiones, cosas que me pasan y post-mortems de
+        proyectos.
+      </p>
+      <hr />
+      <ul class="notas__list">
+        {
+          notas.map((nota) => (
+            <li>
+              <a class="nota" href={`/notas/${nota.id}`}>
+                <span class="nota__date">[{formatDate(nota.data.date)}]</span>
+                <span class="nota__title">{nota.data.title}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .notas {
+    margin-top: 2rem;
+  }
+  .notas__intro {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--text-grey-dark);
+  }
+  .notas__list {
+    margin-top: 1rem;
+  }
+  .nota {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  .nota:hover {
+    background-color: #333333;
+  }
+  .nota__date {
+    font-size: 0.875rem;
+    color: var(--text-grey-dark);
+    flex-shrink: 0;
+  }
+  .nota__title {
+    font-weight: 700;
+  }
+</style>
