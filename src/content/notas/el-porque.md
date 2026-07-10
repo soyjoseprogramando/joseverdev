@@ -1,13 +1,7 @@
 ---
 title: "El porqué de este Blog"
-date: "2025-10-03"
+date: 2025-10-03
 ---
-
-export const { title, date } = frontmatter;
-
-# {title}
-
-**{date}**
 
 ¿Por qué escribir un blog en un mundo donde existe un chat que te responde lo que tú quieras y te lo explica de mil maneras diferentes?
 
