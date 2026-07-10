@@ -1,45 +1,136 @@
 ---
+import { ChevronRight, ChevronsRight, RectangleVertical } from "@lucide/astro";
+
 import Layout from "../layouts/Layout.astro";
-import Presentation from "../components/Presentation.astro";
-import Projects from "../components/Projects.astro";
-import Skills from "../components/Skills.astro";
-import Contact from "../components/Contact.astro";
 ---
 
 <Layout>
   <div class="container">
     <main class="">
-      <Presentation />
-      <Projects />
-      <Skills />
-      <!-- <Blog /> -->
-      <Contact />
+      <section class="josepro">
+        <h1>josepro@dev:~/blog</h1>
+        <div class="josepro__system">
+          <ChevronsRight class="chevrons-right" size={16} color="#10b981" />
+          <p>
+            system uptime: <span class="josepro__span">99,9%</span> | displaying recent
+            posts
+          </p>
+        </div>
+        <hr />
+      </section>
+      <section class="search">
+        <div class="search__box">
+          <ChevronRight color="#ff6b35" />
+          <input class="search__input" type="text" placeholder="️search..." />
+          <div class="cursor"></div>
+        </div>
+      </section>
+      <section class="posts">
+        <article class="post">
+          <div class="post__info">
+            <p>[2017-01-05]</p>
+            <p>::</p>
+            <p class="post__tag">node</p>
+          </div>
+          <h2>Cómo crear un servidor SSH en tu máquina local</h2>
+        </article>
+      </section>
+      <!-- <h1>SSH con tu</h1> -->
     </main>
   </div>
 </Layout>
 
 <style>
-  .projects__container {
+  .josepro {
+    margin-top: 2rem;
+  }
+  .josepro__system {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .josepro__system p {
+    margin-left: 8px;
+    font-size: 0.875rem;
+    color: var(--text-grey-dark);
+  }
+  .josepro__span {
+    color: var(--orange);
+  }
+  .chevrons-right {
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+  .search__box {
+    height: 48px;
+    border: 1px solid var(--border);
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  .search__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0 8px;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+  .cursor {
+    width: 8px;
+    height: 24px;
+    background-color: var(--orange);
+    margin-left: 4px;
+    animation: blink 3s step-start infinite;
+    opacity: 0.7;
+    margin-right: 4px;
   }
 
-  @media (min-width: 720px) {
-    .presentation-container {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      align-items: center;
-      max-width: 720px;
-      margin: auto;
-      flex-direction: row-reverse;
-      margin-bottom: 72px;
-      margin-top: 48px;
-    }
+  .posts {
+    margin-top: 1rem;
+  }
 
-    .shadow-dark svg:hover {
-      box-shadow: 0 2px 0px var(--text-darktheme);
+  .post {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+
+  .post:hover {
+    background-color: #333333;
+    border: 1px solid var(--border);
+  }
+
+  .post__info {
+    display: flex;
+    align-items: start;
+    gap: 8px;
+    color: var(--text-grey-dark);
+  }
+  .post__info p {
+    font-size: 0.875rem;
+  }
+
+  .post__tag {
+    background-color: var(--bg-dark-light);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--orange);
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 0.5;
+    }
+    49% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
     }
   }
 </style>

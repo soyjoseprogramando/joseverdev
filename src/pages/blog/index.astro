@@ -1,7 +1,6 @@
 ---
 import Nav from "@components/Nav.astro";
 import { ArrowLeft } from "@lucide/astro";
-import HeaderMobile from "@components/molecules/HeaderMobile.astro";
 import Post from "@components/Post.astro";
 import Layout from "@layouts/Layout.astro";
 import { getCollection } from "astro:content";
@@ -10,7 +9,6 @@ const posts = await getCollection("posts");
 ---
 
 <Layout nav={false} customBackground={true} pdBottom={false}>
-  <HeaderMobile hidden={false} />
   <Nav />
   <section class="blog">
     <h1>Blog</h1>

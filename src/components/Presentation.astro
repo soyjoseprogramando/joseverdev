@@ -1,22 +1,9 @@
 ---
 import SocialMedia from "../components/SocialMedia.astro";
-import HeaderMobile from "./molecules/HeaderMobile.astro";
 ---
 
 <section id="inicio" class="presentation-container">
-  <HeaderMobile/>
-  <div class="presentation">
-    <h1>DESARROLLO <br /> WEB ESCALABLE</h1>
-    <h3 class="title-3">Joseverdev Fullstack Developer</h3>
-    <p class="paragraph">
-      Apasionado por el codigo y el aprendizaje autodidacta.<br />
-      Creo soluciones web centradas en el usuario.
-    </p>
-    <a class="primary-button" href="#proyectos" id="projects-btn">
-      VER PROYECTOS
-    </a>
-    <SocialMedia />
-  </div>
+  <SocialMedia />
 </section>
 
 <script>
@@ -40,28 +27,7 @@ import HeaderMobile from "./molecules/HeaderMobile.astro";
   h1 {
     margin-bottom: 3rem;
   }
-  .presentation-container {
-    height: 100vh;
-    overflow: auto;
-    background-image: url('/images/bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-  }
 
-  .presentation-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
   .presentation {
     padding-top: 6rem;
     position: relative;
@@ -96,20 +62,5 @@ import HeaderMobile from "./molecules/HeaderMobile.astro";
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  @media (min-width: 600px) {
-    
-    .presentation-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-  @media (min-width: 1080px) {
-    h1 {
-      font-size: 4rem;
-    }
   }
 </style>

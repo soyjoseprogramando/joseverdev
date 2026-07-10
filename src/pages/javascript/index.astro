@@ -1,5 +1,4 @@
 ---
-import HeaderMobile from "@components/molecules/HeaderMobile.astro";
 import Post from "@components/Post.astro";
 import Layout from "@layouts/Layout.astro";
 import { ArrowLeft } from "@lucide/astro";
@@ -10,7 +9,6 @@ const jsPosts = await getCollection("jsPosts");
 ---
 
 <Layout nav={true}>
-  <HeaderMobile hidden={false} />
   <section class="blog">
     <h1>JavaScript</h1>
     <p>

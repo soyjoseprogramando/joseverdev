@@ -23,11 +23,11 @@
 }
 
 :root {
-  --background-dark: #161616;
+  --background-dark: #1f1e1e;
   --bg-dark-box: #1d1d1d;
   --bg-dark-light: #232323;
   --text-grey: #cccccc;
-  --text-white: #ffffff;
+  --text-white: #ededed;
 
   --orange: #ff6b35;
   /* --orange-transparent: rgba(255, 107, 53, 0.5); */
@@ -38,14 +38,18 @@
 
 body {
   background-color: var(--bg-dark-light);
+  font-family: "JetBrains Mono", "Consolas", "Monaco", monospace;
 }
 
 .none {
   display: none;
 }
+.orange {
+  color: var(--orange);
+}
 .container {
-  text-align: left;
   max-width: 1080px;
+  width: 90%;
   margin: auto;
   padding-bottom: 16px;
   border-radius: 16px;
@@ -106,22 +110,21 @@ body {
 }
 
 body {
-  font-family: "Inter", sans-serif;
   background: var(--bg-dark-light);
-  color: #fff;
+  color: var(--text-white);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-h1,
-.title-2,
-.title-3 {
-  font-family: "JetBrains Mono", "Consolas", "Monaco", monospace;
-}
 h1 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
+}
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .title-2 {
@@ -193,7 +196,6 @@ a {
   border-bottom: 2px solid var(--background-dark);
 }
 main {
-  text-align: center;
   margin: auto;
   min-width: 300px;
   max-width: 1080px;
@@ -209,13 +211,6 @@ pre {
 
 .blog {
   padding-top: 96px;
-}
-.posts {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
 }
 
 .blog__button-container {

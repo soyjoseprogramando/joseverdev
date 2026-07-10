@@ -2,7 +2,6 @@
 import "@/styles/markdown.css";
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import HeaderMobile from "@/components/molecules/HeaderMobile.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("algorithms");
@@ -16,7 +15,6 @@ const { Content } = await render(post);
 ---
 
 <Layout nav={false}>
-  <HeaderMobile />
   <section class="algorithms">
     <div class="algorithms__content">
       <Content />

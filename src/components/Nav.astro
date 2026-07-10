@@ -1,245 +1,250 @@
 ---
-import {
-  Home,
-  FolderCode,
-  Brain,
-  MailPlus,
-  BookOpen,
-  Terminal,
-} from "@lucide/astro";
+import { Logs, SquareTerminal, Server, X } from "@lucide/astro";
 
 const navItems = [
-  { path: "/", label: "Inicio", icon: Home },
-  { path: "/blog", label: "Blog", icon: BookOpen },
-  { path: "/linux", label: "Linux", icon: Terminal },
-  { path: "/javascript", label: "JS", icon: FolderCode },
-  { path: "/algoritmos", label: "Algoritmos", icon: Brain },
+  { path: "/", label: "blog" },
+  { path: "/about", label: "about" },
 ];
 ---
 
 <nav>
-  <div class="nav-container">
-    <div class="">
-      <a class="nav__logo-container" href="/">
-        <div class="nav__img-container">
-          <img class="nav__logo-img" src="/images/logo.png" alt="" />
-        </div>
-        <p class="nav__username">joseverdev</p>
-      </a>
+  <div class="nav nav--always-visible">
+    <SquareTerminal color="#ff6b35" />
+    <a href="/" class="nav__username">~/joseprogramando</a>
+    <div id="menu" class="menu-icon">
+      <Logs id="logs-icon" />
+      <X id="close-menu" color="#ff6b35" stroke-width={3} class="hidden" />
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu">
+    <div class="mobile-menu__nav">
+      {
+        navItems.map((item, idx) => (
+          <a href={item.path} class="mobile-menu__link">
+            <p class="mobile-menu__idx">[{idx + 1}]</p>
+            <p class="mobile-menu__label">
+              <span>/</span>
+              {item.label}
+            </p>
+          </a>
+        ))
+      }
     </div>
 
-    <ul class="navlist">
-      {
-        navItems.map((item) => {
-          const Icon = item.icon;
-          return (
-            <li class={item.path === "/" ? "indexPath" : ""}>
-              <a
-                href={item.path}
-                class={item.path === "/" ? "item indexPath" : "item"}
-              >
-                <div class="navlist__icon">{Icon && <Icon size={18} />}</div>
-                <span class="navlist__label">{item.label}</span>
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+    <hr />
+    <div class="system">
+      <div class="system__title">
+        <Server color="#ff6b35" size={16} />
+        <p>SYSTEM STATUS</p>
+      </div>
+      <div class="system__info">
+        <p class="system__user">josepro@menu:~$ <span>uptime</span></p>
+        <p class="system__uptime">24 days, 6:42</p>
+      </div>
+      <div class="social-media">
+        <p>[github]</p>
+        <p>[twitter]</p>
+      </div>
+    </div>
   </div>
 </nav>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentPath = window.location.pathname.replace(/\/$/, "");
-    document.querySelectorAll(".navlist a").forEach((link) => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active");
-      }
-    });
+  const $menuIcon = document.getElementById("menu"),
+    $mobileMenu = document.getElementById("mobile-menu"),
+    $logsIcon = document.getElementById("logs-icon"),
+    $closeIcon = document.getElementById("close-menu");
 
-    if (window.innerWidth > 600) {
-      document.querySelectorAll(".navlist__label").forEach((label) => {
-        if (label.textContent === "JS") {
-          label.textContent = "Javascript";
-        }
-      });
+  $menuIcon?.addEventListener("click", () => {
+    const isOpen = $mobileMenu?.classList.contains("show");
+
+    if (isOpen) {
+      $mobileMenu?.classList.remove("show");
+      $mobileMenu?.classList.add("hide");
+
+      $logsIcon?.classList.remove("hidden");
+      $closeIcon?.classList.add("hidden");
+
+      setTimeout(() => {
+        $mobileMenu?.classList.remove("hide");
+      }, 300);
+    } else {
+      $mobileMenu?.classList.remove("hide");
+      $mobileMenu?.classList.add("show");
+
+      $logsIcon?.classList.add("hidden");
+      $closeIcon?.classList.remove("hidden");
     }
   });
 </script>
 
 <style>
-  .nav__logo-container {
-    display: none;
-  }
-  .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 100;
-  }
-
-  .navlist {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    height: 100%;
-    width: 100%;
-    list-style: none;
-    position: relative;
-    color: #888888;
-  }
-  .logo {
-    width: 56px;
-    height: 40px;
-    position: absolute;
-    cursor: pointer;
-    left: 0;
-  }
-  .logo img {
-    width: 100%;
-    height: 100%;
-  }
-
   nav {
+    height: 4rem;
+  }
+  .nav {
     background-color: var(--background-dark);
-    border-top: 1px solid var(--border);
     position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    height: 48px;
-    z-index: 1000;
+    top: 0; /* Fijo arriba */
+    left: 0; /* Desde el borde izquierdo */
+    right: 0; /* Hasta el borde derecho */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #333333;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
   }
-  .nav-container {
-    max-width: 1400px;
-    margin: 0 auto;
+
+  .nav__container {
+    width: 16px;
+    height: 16px;
   }
-  .nav__logo-img {
+
+  .nav__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   .nav__username {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav__username:hover {
+    opacity: 0.8;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background-dark);
+    border-bottom: 1px solid #333333;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out;
+    transform: translateY(-10px);
+  }
+
+  .mobile-menu.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobile-menu.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+
+  .mobile-menu.hidden {
     display: none;
   }
-  .navlist__label {
-    user-select: none;
+
+  .mobile-menu__header {
+    padding: 1rem;
   }
-  ul {
-    height: 100%;
+
+  .mobile-menu__nav {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+  }
+
+  .mobile-menu__link {
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem;
+    font-weight: bold;
+    display: flex;
+    gap: 12px;
+  }
+
+  .mobile-menu__link:hover {
+    opacity: 0.8;
+  }
+  .mobile-menu__idx {
+    color: var(--orange);
+    font-size: 0.875rem;
+    opacity: 0.5;
+  }
+  .mobile-menu__label {
+    display: flex;
+    gap: 1px;
+  }
+  .mobile-menu__label span {
+    color: var(--orange);
+  }
+
+  .system {
+  }
+  .system__title {
+    display: flex;
     align-items: center;
+    gap: 8px;
+  }
+  .system__title p {
+    font-weight: bold;
+    font-size: 0.875rem;
+  }
+  .system__info {
+    margin-top: 8px;
+    margin-left: 24px;
+  }
+  .system__user {
+    font-size: 0.875rem;
+    color: var(--orange);
+  }
+  .system__user span {
+    color: var(--text-white);
+  }
+  .system__uptime {
+    font-size: 0.875rem;
+    color: var(--text-grey);
+  }
+  .social-media {
+    margin-top: 16px;
+    margin-left: 24px;
+    display: flex;
     gap: 16px;
   }
-  li {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .social-media p {
+    font-size: 0.875rem;
+    color: var(--text-grey);
+  }
+  .cursor {
+    width: 8px;
+    height: 24px;
+    background-color: var(--orange);
+    margin-left: 4px;
+    animation: blink 3s step-start infinite;
+    opacity: 0.7;
+    margin-right: 4px;
   }
 
-  .logo-link {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
+  .hidden {
+    display: none;
   }
 
-  .navlist a {
-    font-size: 14px;
-    font-weight: 700;
-    position: relative;
-  }
-  .navlist a::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--orange);
-    transition: width 0.3s ease;
-  }
-  .navlist a:hover::after,
-  .navlist a.active::after {
-    width: 100%;
-  }
-
-  @media (min-width: 600px) {
-    nav {
-      top: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      height: fit-content;
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-    .nav-container {
-      display: flex;
-      gap: 4rem;
-      padding: 1rem 2rem;
-    }
-    .nav__img-container {
-      display: flex;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      height: 100%;
-    }
-    .nav__logo-img {
-      object-fit: scale-down;
-    }
-    .navlist {
-      justify-content: space-evenly;
-      height: 48px;
-    }
-    .navlist__label {
-      font-size: 1rem;
-      color: var(--text-grey);
-      font-family: "JetBrains Mono", monospace;
-    }
-    .navlist__icon {
-      display: none;
-    }
-    .nav__logo-container {
-      width: 48px;
-      display: block;
-    }
-  }
-
-  @media (min-width: 1080px) {
-    .nav__logo-container {
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      gap: 1rem;
-    }
-    .nav__img-container {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-    }
-    .nav-container {
-      align-items: center;
-      padding: 0.5rem 2rem;
-      justify-content: space-between;
-    }
-    .navlist {
-      justify-content: flex-end;
-      gap: 4rem;
-    }
-    .nav__username {
-      display: block;
-      font-family: "JetBrains Mono", monospace;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
+  #logs-icon,
+  #close-menu {
+    transition: opacity 0.3s ease-out;
   }
 </style>
