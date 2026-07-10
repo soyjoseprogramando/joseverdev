@@ -6,7 +6,7 @@ import expressiveCode from 'astro-expressive-code';
 
 export default defineConfig({
   site: 'https://joseeverm.github.io/',
-	 //base: '/joseverm'
+	base: '/blog',
   devToolbar: {
     enabled: false,
   },
