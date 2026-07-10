@@ -1,5 +1,5 @@
 ---
-import { Logs, SquareTerminal, Server, X } from "@lucide/astro";
+import { Logs, Server, X } from "@lucide/astro";
 
 const navItems = [
   { path: "/", label: "blog" },
@@ -10,7 +10,7 @@ const navItems = [
 
 <nav>
   <div class="nav nav--always-visible">
-    <SquareTerminal color="#ff6b35" />
+    <img class="nav__logo" src="/logo.png" alt="" width="28" height="28" />
     <a href="/" class="nav__username">~/joseprogramando</a>
     <button
       id="menu"
@@ -121,6 +121,11 @@ const navItems = [
   /* espacio para que el contenido no quede oculto tras la barra */
   :global(body) {
     padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+  }
+
+  .nav__logo {
+    border-radius: 6px;
+    flex-shrink: 0;
   }
 
   .nav__username {

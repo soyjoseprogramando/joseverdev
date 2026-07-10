@@ -1,0 +1,46 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, "");
+const ruta = path === "" ? "~" : `~${path}`;
+---
+
+<div class="breadcrumb">
+  <span class="breadcrumb__user">josepro@dev:</span><span
+    class="breadcrumb__path">{ruta}</span>
+  <span class="breadcrumb__cursor"></span>
+</div>
+
+<style>
+  .breadcrumb {
+    background-color: var(--background-dark);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .breadcrumb__user {
+    color: var(--text-grey-dark);
+    flex-shrink: 0;
+  }
+  .breadcrumb__path {
+    color: var(--orange);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .breadcrumb__cursor {
+    flex-shrink: 0;
+    width: 7px;
+    height: 14px;
+    margin-left: 6px;
+    background-color: var(--orange);
+    opacity: 0.7;
+    animation: breadcrumb-blink 1.2s step-start infinite;
+  }
+  @keyframes breadcrumb-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
