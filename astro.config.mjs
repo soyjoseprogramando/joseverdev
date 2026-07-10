@@ -6,6 +6,9 @@ import expressiveCode from 'astro-expressive-code';
 
 export default defineConfig({
   site: 'https://josever.dev/',
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [
     sitemap(),
     expressiveCode({
