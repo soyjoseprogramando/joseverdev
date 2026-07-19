@@ -1,6 +1,5 @@
 ---
 import Nav from "../components/Nav.astro";
-import Breadcrumb from "../components/Breadcrumb.astro";
 import Footer from "../components/Footer.astro";
 import HtmlLayout from "./HtmlLayout.astro";
 
@@ -10,7 +9,6 @@ const { nav = true, customBackground = false, pdBottom = true } = Astro.props;
 <HtmlLayout>
   <div class="content-wrapper">
     {nav && <Nav />}
-    <Breadcrumb />
     <main>
       <slot />
     </main>
