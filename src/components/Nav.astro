@@ -1,17 +1,19 @@
 ---
 import { Logs, Server, X } from "@lucide/astro";
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const navItems = [
-  { path: "/", label: "blog" },
-  { path: "/notas", label: "notas" },
-  { path: "/about", label: "about" },
+  { path: `${base}/`, label: "blog" },
+  { path: `${base}/notas`, label: "notas" },
+  { path: `${base}/about`, label: "about" },
 ];
 ---
 
 <nav>
   <div class="nav nav--always-visible">
-    <img class="nav__logo" src="/logo.png" alt="" width="28" height="28" />
-    <a href="/" class="nav__username">~/joseprogramando</a>
+    <img class="nav__logo" src={`${base}/logo.png`} alt="" width="28" height="28" />
+    <a href={`${base}/`} class="nav__username">~/joseprogramando</a>
     <button
       id="menu"
       class="menu-icon"
@@ -86,12 +88,13 @@ const navItems = [
   });
 
   // marcar la ruta actual en el menu
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
   document.querySelectorAll(".mobile-menu__link").forEach((link) => {
-    const href = link.getAttribute("href");
+    const href = (link.getAttribute("href") ?? "").replace(/\/$/, "");
     if (
       href === currentPath ||
-      (href !== "/" && currentPath.startsWith(href + "/"))
+      (href !== base && currentPath.startsWith(href + "/"))
     ) {
       link.classList.add("active");
     }
