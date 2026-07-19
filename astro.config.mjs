@@ -5,8 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import expressiveCode from 'astro-expressive-code';
 
 export default defineConfig({
-  site: 'https://joseeverm.github.io/',
-	base: '/blog',
+  site: 'https://joseprogramando.com',
   devToolbar: {
     enabled: false,
   },
